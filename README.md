@@ -60,6 +60,33 @@ The `analysis/` folder contains scripts that interface with [CosmoTransitions](h
   <img src="assets/bubble_3d_256x256x256.gif" width="480" alt="3D bubble nucleation">
 </p>
 
+### Gravitational wave spectrum analysis
+
+The `analysis/gwSpectrum.py` script computes the stochastic gravitational wave spectrum produced by a first-order phase transition, using tunneling data (S3/T vs T) from CosmoTransitions.
+
+**Physics pipeline:**
+1. From the bounce action S3/T(T), find the nucleation temperature T_n where Gamma/H^4 = 1
+2. Compute beta/H = -d ln(Gamma) / d ln(T) and the mean bubble separation HR_* = (8pi)^{1/3} / (beta/H)
+3. Compute the reheating temperature T_RH = (30 delV / (pi^2 g_*))^{1/4}, or from model parameters via eq. (4.9) of [arXiv:2412.15864](https://arxiv.org/abs/2412.15864)
+4. Calculate the GW power spectrum h^2 Omega_GW(f) from sound waves (Hindmarsh et al. 2017), turbulence (Caprini et al. 2009), and bubble collisions (envelope approximation)
+5. Include the suppression factor Upsilon = HR_* / Uf from Ellis, Lewicki, and No (2019), shown as an uncertainty band
+6. Overlay detector sensitivity curves (LISA, DECIGO, BBO, ET, aLIGO)
+
+```bash
+# Basic usage
+python analysis/gwSpectrum.py data/tunneling/set6/T-S_param_set6_lambdaSix_0E+00_fermion_only.csv
+
+# Specify T_RH directly (in GeV)
+python analysis/gwSpectrum.py <csv_path> --T_RH 500
+
+# Specify model parameters (M_S, g_X, mu_*)
+python analysis/gwSpectrum.py <csv_path> --Ms 1000 --gX 1.05 --mu_star 10000
+```
+
+<p align="center">
+  <img src="assets/gw_spectrum_sample.png" width="600" alt="GW spectrum from thermal inflation phase transition">
+</p>
+
 ## Quick Start
 
 ```bash
@@ -107,7 +134,7 @@ All CLI arguments are passed through to the Python simulation script. The shell 
 ```
 potential/       Physics: potential definitions
 simulation/      Main simulation scripts
-analysis/        Tunneling, action & potential analysis
+analysis/        Tunneling, action & potential analysis, GW spectrum
 postprocess/     Revisualization & GIF creation
 utils/           Diagnostic & profiling tools
 scripts/         Helper shell scripts (run from project root)
