@@ -46,8 +46,13 @@ The `analysis/` folder contains scripts that interface with [CosmoTransitions](h
 ### Complex scalar field -- bubble collisions and cosmic strings (512x512 lattice)
 
 <p align="center">
+  <img src="assets/strings3d_512x512.png" width="480" alt="Complex scalar field with cosmic strings">
+</p>
+
+<p align="center">
   <img src="assets/complex_scalar_512x512.gif" width="480" alt="Complex scalar field with cosmic strings">
 </p>
+
 
 ### 3D bubble nucleation (256x256x256 lattice)
 
