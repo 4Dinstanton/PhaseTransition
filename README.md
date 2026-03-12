@@ -1,4 +1,4 @@
-# PhaseTransition - Lattice Simulation Framework
+# thermal-inflation-phase-transition - Lattice Simulation Framework
 
 High-performance lattice simulation for finite-temperature scalar field theory, studying first-order cosmological phase transitions, false vacuum decay, bubble nucleation, and topological defect formation (cosmic strings).
 
